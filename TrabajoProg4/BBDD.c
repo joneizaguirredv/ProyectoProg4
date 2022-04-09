@@ -1,15 +1,3 @@
-
-
-/*
-
-
-						PRUEBA GIT HUB
-
-
-*/
-
-
-
 #include <stdio.h>
 #include <string.h>
 #include "BBDD.h"
