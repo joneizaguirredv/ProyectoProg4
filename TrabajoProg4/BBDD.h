@@ -1,3 +1,7 @@
+/*
+    ABASCAL JAUNA
+*/
+
 #ifndef BBDD_H_
 #define BBDD_H_
 #include "sqlite3.h"
