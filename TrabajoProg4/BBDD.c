@@ -8,6 +8,7 @@ void crearTablas(sqlite3 *db){
 	sqlite3_stmt *stmt;
 
 	char sql[] = "create table persona(id int, nom varchar2(20))";
+	/*PRUEBA ASIER GITHUB*/
 
 
 	/*int result = */sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
