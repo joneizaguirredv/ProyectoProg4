@@ -7,7 +7,15 @@
 void crearTablas(sqlite3 *db){
 	sqlite3_stmt *stmt;
 
-	char sql[] = "create table persona(id int, nom varchar2(20))";
+	char sql[] = "DROP TABLE IF EXISTS hotel"
+				 "CREATE TABLE IF NOT EXISTS hotel(Id INTEGER PRIMARY KEY, compania varchar(20), nombre_hotel varchar(20), municipio varchar(20), provincia varchar(20), estrellas int, valoracion dec(2,1)";
+
+	char sql[] = "CREATE TABLE IF NOT EXISTS administrador(Id INTEGER PRIMARY KEY, nombre_administrador varchar(20), apellido_administrador varchar(20), correo varchar(40), nss int(11), numTrabajador varchar(20)";
+	
+	char sql[] = "CREATE TABLE IF NOT EXISTS usuario(Id INTEGER PRIMARY KEY, nombre_cliente varchar(20), apellido_cliente varchar(20), correo varchar(40), tlf int(9)";
+
+	char sql[] = "CREATE TABLE IF NOT EXISTS reserva(Id INTEGER PRIMARY KEY, habitacion int(3), tlf int(9), nom_hotel varchar(20), correo_cliente varchar(40), fecha_entrada date, fecha_salida date)";
+
 
 
 
