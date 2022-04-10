@@ -26,7 +26,20 @@ typedef struct{
     char* contrasena;
 }inicioSesion;
 
+
+typedef struct{
+    char nombre;
+    char apellido;
+    char correo;
+    char contrasena;
+    char tlf;
+}registro;
+
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu);
 inicioSesion datosSesion();
+
+int Registro();
+
+
 
 #endif
