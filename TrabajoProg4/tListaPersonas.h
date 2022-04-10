@@ -38,7 +38,7 @@ typedef struct{
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu);
 inicioSesion datosSesion();
 
-int Registro();
+int registrar(tListaUsuarios lu);
 
 
 

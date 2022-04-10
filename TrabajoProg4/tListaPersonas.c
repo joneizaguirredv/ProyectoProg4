@@ -23,7 +23,7 @@ inicioSesion datosSesion(){
     return inicio;    
 }
 
-registro datosSesion(){
+registro datosRegistro(){
     registro regis;
     char nombre[100];
     char apellido[100];
@@ -67,36 +67,55 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     int res;
 
     for(int i = 0; i<lt.numeroTrabajadores; i++){
-        if(strcmp(sesion.correo, lt.listaTrabajadores[i].correoTrabajador)==0 && strcmp(sesion.contrasena, lt.listaTrabajadores[i].contrasenaTrabajador)==0){
-            printf("Eres un administrador");
-            fflush(stdout);
-            res = 2;
-        }else if (strcmp(sesion.correo, lu.listaUsuarios[i].correoUsuario)==0 && strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
-            printf("Eres un usuario");
-            res = 1;
+        if(strcmp(sesion.correo, lt.listaTrabajadores[i].correoTrabajador)==0){
+            if (strcmp(sesion.contrasena, lt.listaTrabajadores[i].contrasenaTrabajador)==0){
+                printf("Eres un administrador");
+                fflush(stdout);
+                res = 2;    
+            }else{
+                printf("Contrasena incorrecta");
+                fflush(stdout);
+            }
+
+        }else if (strcmp(sesion.correo, lu.listaUsuarios[i].correoUsuario)==0){
+            if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
+                printf("Eres un usuario");
+                fflush(stdout);
+                res = 2;    
+            }else{
+                printf("Contrasena incorrecta");
+                fflush(stdout);
+                }
         }else{
             printf("No existe ningun usuario");
+            fflush(stdout);
             res = 0;
         }   
     }
 }
 
-int registrar{
-    registro sesion = datosSesion();
+int registrar(tListaUsuarios lu){
+    registro sesion = datosRegistro();
     int res;
 
-    for(int i = 0; i<lt.numeroTrabajadores; i++){
-        if(strcmp(sesion.correo, lt.listaTrabajadores[i].correoTrabajador)==0 && strcmp(sesion.contrasena, lt.listaTrabajadores[i].contrasenaTrabajador)==0){
-            printf("Eres un administrador");
-            fflush(stdout);
-            res = 2;
-        }else if (strcmp(sesion.correo, lu.listaUsuarios[i].correoUsuario)==0 && strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
-            printf("Eres un usuario");
-            res = 1;
+    for(int i = 0; i<lu.numeroUsuarios; i++){
+        if(strcmp(sesion.nombre, lu.listaUsuarios[i].correoUsuario)==0){
+            if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
+                printf("Este usuario ya existe");
+                fflush(stdout);
+                res = 2;    
+            }else{
+                printf("Contrasena incorrecta");
+                fflush(stdout);
+            }
         }else{
-            printf("No existe ningun usuario");
-            res = 0;
+            /* Llamar a la funcion anadirUsuario */
+            printf("¡Usuario creado correctamente!");
+            res = 1;
         }   
-    }
+
+    }   
 }
+
+
 
