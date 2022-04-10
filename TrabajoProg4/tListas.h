@@ -13,7 +13,10 @@ typedef struct{
 
 }tListaHoteles;
 
-
+Hotel datosHotel();
+void modificarHotel(tListaHoteles* tl);
+void anadirHotel(tListaHoteles* tl);
+void borrarHotel(tListaHoteles* tl);
 
 typedef struct{
     Usuario* listaUsuarios;

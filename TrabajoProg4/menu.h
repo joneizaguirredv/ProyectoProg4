@@ -7,6 +7,5 @@ char menuInicial();
 char menuTrabajador();
 char menuCliente();
 Usuario datosUsuario();
-Hotel datosHotel();
 
 #endif
