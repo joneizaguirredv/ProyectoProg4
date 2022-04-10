@@ -62,6 +62,7 @@ char menuFiltrar(){
 }
 
 
+
 Usuario datosUsuario(){
     Usuario user;
     char nombre[100];

@@ -6,6 +6,7 @@ typedef struct
 	char *NombreTrabajador;
 	char *ApellidoTrabajador;
 	char *correoTrabajador;
+	char *contrasenaTrabajador;
 	int numTrabajador;
 	int NSS;
 

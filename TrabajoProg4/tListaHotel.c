@@ -1,4 +1,4 @@
-#include "tListas.h"
+#include "tListaHotel.h"
 #include "hotel.h"
 #include "stdio.h"
 #include "stdlib.h"
@@ -106,4 +106,7 @@ void borrarHotel(tListaHoteles* tl){
     }
     
 }
+
+
+
 
