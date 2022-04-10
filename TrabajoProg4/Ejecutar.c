@@ -3,7 +3,10 @@
 #include <string.h>
 #include "menu.h"
 #include "usuario.h"
-#include "tListas.h"
+#include "tListaHotel.h"
+#include "tListaPersonas.h"
+#include "tListaReservas.h"
+
 
 
 void leerFichero(tListaHoteles* lt){

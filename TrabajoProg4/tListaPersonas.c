@@ -99,7 +99,7 @@ int registrar(tListaUsuarios lu){
     int res;
 
     for(int i = 0; i<lu.numeroUsuarios; i++){
-        if(strcmp(sesion.nombre, lu.listaUsuarios[i].correoUsuario)==0){
+        if(strcmp(sesion.correo, lu.listaUsuarios[i].correoUsuario)==0){
             if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
                 printf("Este usuario ya existe");
                 fflush(stdout);
