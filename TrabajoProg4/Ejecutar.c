@@ -45,6 +45,13 @@ void leerFichero(tListaHoteles* lt){
 
 
 int main(void){
+    tListaHoteles hoteles;
+    leerfichero(&hoteles);
+    anadirHotel(&hoteles);
+    for(int i = 0; i < hoteles.numHoteles; i++){
+        printf("%s,%s,%s,%s,%d,%d", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,&hoteles.listaHoteles[i].numEstrellas,&hoteles.listaHoteles[i].valoracionMedia);
+        fflush(stdout);
+    }
     //Usuario p = datosUsuario();
     //Hotel h = datosHotel();
     tListaTrabajadores lt;

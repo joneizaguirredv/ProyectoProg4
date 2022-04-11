@@ -57,6 +57,30 @@ Hotel datosHotel(){
     return hotel;
 }
 
+void anadirHotel(tListaHoteles* tl){
+
+    Hotel hotel = datosHotel();
+    Hotel *auxiliar;
+    int i;
+    auxiliar = (Hotel*)malloc(tl->numHoteles*sizeof(Hotel));
+
+    for(i=0;i<tl->numHoteles;i++){
+        auxiliar[i]=tl->listaHoteles[i];
+    }
+
+    free(tl->listaHoteles);
+    tl->listaHoteles = (Hotel*)malloc((tl->numHoteles+1)*sizeof(Hotel));
+
+    for(i=0;i<tl->numHoteles;i++){
+        tl->listaHoteles[i]=auxiliar[i];
+    }
+
+    free(auxiliar);
+    tl->listaHoteles[tl->numHoteles] = hotel;
+	tl->numHoteles++;
+}
+
+
 void modificarHotel(tListaHoteles* tl){
     int i;
     char nombre[100];
