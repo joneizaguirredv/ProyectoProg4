@@ -1,7 +1,3 @@
-/*
-    ABASCAL JAUNA
-*/
-
 #ifndef BBDD_H_
 #define BBDD_H_
 #include "sqlite3.h"
@@ -13,7 +9,13 @@ void crearTablas(sqlite3 *db);
 void mostrarHoteles(sqlite3 *db);
 void insertarHotel(sqlite3 *db, Hotel h);
 void borrarHotel(sqlite3 *db, char *nombre);
-void insertarUsuario(sqlite3 *db, Usuario u);
-void mostrarReservas(sqlite3 *db, Reserva r);cxz
+void insertarUsuario(sqlite3 *db, int, char*);
+void mostrarReservas(sqlite3 *db, Reserva r);
+int visualizarHoteles(sqlite3 *db);
+int borrarTodosHoteles(sqlite3 *db);
+int borrarTodosTrabajadores(sqlite3 *db);
+int borrarTodosUsuarios(sqlite3 *db);
+int borrarTodasReservas(sqlite3 *db);
+
 
 #endif
