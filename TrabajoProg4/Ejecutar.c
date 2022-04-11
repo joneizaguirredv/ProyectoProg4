@@ -46,17 +46,17 @@ void leerFichero(tListaHoteles* lt){
 
 int main(void){
     tListaHoteles hoteles;
-    leerfichero(&hoteles);
+    leerFichero(&hoteles);
     anadirHotel(&hoteles);
     for(int i = 0; i < hoteles.numHoteles; i++){
-        printf("%s,%s,%s,%s,%d,%d", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,&hoteles.listaHoteles[i].numEstrellas,&hoteles.listaHoteles[i].valoracionMedia);
+        printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
         fflush(stdout);
     }
     //Usuario p = datosUsuario();
     //Hotel h = datosHotel();
-    tListaTrabajadores lt;
-    tListaUsuarios lu;
-    lu.numeroUsuarios=0;
+    //tListaTrabajadores lt;
+    //tListaUsuarios lu;
+    //lu.numeroUsuarios=0;
     /*printf("Entra");
     fflush(stdout);
     lt.listaTrabajadores = (Trabajador*)malloc(sizeof(Trabajador));
@@ -80,10 +80,10 @@ int main(void){
     int i = iniciarSesion(lt,lu);
     printf("%d", i);
     fflush(stdout);*/
-    Usuario user = datosUsuario();
+    //Usuario user = datosUsuario();
     //printf("Sale");
     //fflush(stdout);
-    anadirPersona(user, &lu);
+    //anadirPersona(user, &lu);
     //printf("%s,%s,%s,%s,%d\n", lu.listaUsuarios[0].NombreUsuario,lu.listaUsuarios[0].ApellidoUsuario,lu.listaUsuarios[0].correoUsuario,lu.listaUsuarios[0].contrasenyaUsuario,lu.listaUsuarios[0].numeroTelefono);
     /*lu.listaUsuarios[0].NombreUsuario = "Jon";
     lu.listaUsuarios[0].ApellidoUsuario = "eizaguirre";
@@ -91,8 +91,8 @@ int main(void){
     lu.listaUsuarios[0].contrasenyaUsuario = "jon";
     lu.listaUsuarios[0].numeroTelefono = 124354689;
     lu.numeroUsuarios = 1;*/
-    int i = registrar(&lu);
-    printf("%d", i);
+    //int i = registrar(&lu);
+    //printf("%d", i);
 
     /*char opcion,opcion2;
     do{

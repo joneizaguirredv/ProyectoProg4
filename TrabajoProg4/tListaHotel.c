@@ -52,7 +52,7 @@ Hotel datosHotel(){
     strcpy(hotel.Municipio, municipio);
     strcpy(hotel.Provincia, provincia);
     hotel.numEstrellas = numEstrellas;
-    printf("%s,%s,%s,%s,%d, %d", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.Provincia, hotel.numEstrellas, hotel.valoracionMedia);
+    printf("%s,%s,%s,%s,%d, %d\n", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.Provincia, hotel.numEstrellas, hotel.valoracionMedia);
 
     return hotel;
 }
