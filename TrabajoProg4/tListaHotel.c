@@ -84,29 +84,32 @@ void modificarHotel(tListaHoteles* tl){
 }
 
 void borrarHotel(tListaHoteles* tl){
-    int i;
+    int i,pos,enc;
     char nombre[100];
     printf("Introduce el nombre del hotel: ");
     fflush(stdout);
     fflush(stdin);
     scanf("%s",nombre);
-    for(i=0;i<tl->numHoteles;i++){
-        if(strcmp(tl->listaHoteles[i].Nombre,nombre)==0){
-            if(strcmp(tl->listaHoteles[i].Nombre,tl->listaHoteles[tl->numHoteles].Nombre)){
-                tl->listaHoteles[i] = tl->listaHoteles[i-1];
-            }else{
-                tl->listaHoteles[i] = tl->listaHoteles[i+1];
-            }
-
-            tl->numHoteles--;
+    pos = 0;
+    enc = 0;
+    while(!enc && pos<tl->numHoteles){
+        if(strcmp(tl->listaHoteles[pos].Nombre,nombre)==0){
+            enc = 1;
         }else{
-            printf("No se ha podido encontrar el hotel indicado");
-            fflush(stdout);
+            pos++;
         }
     }
-    
+    if(enc){
+        for(i=pos;i<tl->numHoteles-1;i++){
+            tl->listaHoteles[i] = tl->listaHoteles[i+1];
+        }
+        tl->numHoteles--;
+    }else{
+            printf("No se ha podido encontrar el hotel indicado");
+            fflush(stdout);
+        
+    }
 }
-
 
 
 

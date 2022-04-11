@@ -23,23 +23,16 @@ typedef struct{
 }tListaTrabajadores;
 
 typedef struct{
-    char* correo;
-    char* contrasena;
+    char correo[100];
+    char contrasena[100];
 }inicioSesion;
 
 
-typedef struct{
-    char nombre;
-    char apellido;
-    char correo;
-    char contrasena;
-    char tlf;
-}registro;
 
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu);
 inicioSesion datosSesion();
-
-int registrar(tListaUsuarios lu);
+void anadirPersona(Usuario user, tListaUsuarios *lt);
+int registrar(tListaUsuarios* lu);
 
 
 

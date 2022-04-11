@@ -49,7 +49,8 @@ int main(void){
     //Hotel h = datosHotel();
     tListaTrabajadores lt;
     tListaUsuarios lu;
-    printf("Entra");
+    lu.numeroUsuarios=0;
+    /*printf("Entra");
     fflush(stdout);
     lt.listaTrabajadores = (Trabajador*)malloc(sizeof(Trabajador));
     lt.listaTrabajadores[0].NombreTrabajador = (char*)malloc((strlen("alu")+1)*sizeof(char));
@@ -69,15 +70,22 @@ int main(void){
     printf("%s,%s,%s,%s,%d,%d\n", lt.listaTrabajadores[0].NombreTrabajador,lt.listaTrabajadores[0].ApellidoTrabajador,lt.listaTrabajadores[0].correoTrabajador,lt.listaTrabajadores[0].contrasenaTrabajador,lt.listaTrabajadores[0].NSS,lt.listaTrabajadores[0].numTrabajador);
     fflush(stdout);
 
-    lu.listaUsuarios[0].NombreUsuario = "Jon";
+    int i = iniciarSesion(lt,lu);
+    printf("%d", i);
+    fflush(stdout);*/
+    Usuario user = datosUsuario();
+    //printf("Sale");
+    //fflush(stdout);
+    anadirPersona(user, &lu);
+    //printf("%s,%s,%s,%s,%d\n", lu.listaUsuarios[0].NombreUsuario,lu.listaUsuarios[0].ApellidoUsuario,lu.listaUsuarios[0].correoUsuario,lu.listaUsuarios[0].contrasenyaUsuario,lu.listaUsuarios[0].numeroTelefono);
+    /*lu.listaUsuarios[0].NombreUsuario = "Jon";
     lu.listaUsuarios[0].ApellidoUsuario = "eizaguirre";
     lu.listaUsuarios[0].correoUsuario = "j@gmail.com";
     lu.listaUsuarios[0].contrasenyaUsuario = "jon";
     lu.listaUsuarios[0].numeroTelefono = 124354689;
-    lu.numeroUsuarios = 1;
-   
-    int i = iniciarSesion(lt,lu);
-    printf("");
+    lu.numeroUsuarios = 1;*/
+    int i = registrar(&lu);
+    printf("%d", i);
 
     /*char opcion,opcion2;
     do{

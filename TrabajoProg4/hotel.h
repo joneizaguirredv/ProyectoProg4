@@ -1,6 +1,7 @@
 #ifndef HOTEL_H_
 #define HOTEL_H_
 
+
 typedef struct
 {
 	char *Compania;
