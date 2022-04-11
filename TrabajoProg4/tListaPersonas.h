@@ -5,6 +5,7 @@
 #include "trabajador.h"
 #include "hotel.h"
 #include "reserva.h"
+#include "menu.h"
 
 
 typedef struct{

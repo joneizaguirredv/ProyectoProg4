@@ -46,7 +46,38 @@ void leerFichero(tListaHoteles* lt){
 
 int main(void){
     //Usuario p = datosUsuario();
-    Hotel h = datosHotel();
+    //Hotel h = datosHotel();
+    tListaTrabajadores lt;
+    tListaUsuarios lu;
+    printf("Entra");
+    fflush(stdout);
+    lt.listaTrabajadores = (Trabajador*)malloc(sizeof(Trabajador));
+    lt.listaTrabajadores[0].NombreTrabajador = (char*)malloc((strlen("alu")+1)*sizeof(char));
+    lt.listaTrabajadores[0].ApellidoTrabajador = (char*)malloc((strlen("alok")+1)*sizeof(char));
+    lt.listaTrabajadores[0].contrasenaTrabajador = (char*)malloc((strlen("jon@gmail.com")+1)*sizeof(char));
+    lt.listaTrabajadores[0].correoTrabajador = (char*)malloc((strlen("jon")+1)*sizeof(char));
+    printf("Entra");
+    fflush(stdout);
+    strcpy(lt.listaTrabajadores[0].NombreTrabajador , "alu");
+    strcpy(lt.listaTrabajadores[0].ApellidoTrabajador , "alok");
+    strcpy(lt.listaTrabajadores[0].correoTrabajador , "jon@gmail.com");
+    strcpy(lt.listaTrabajadores[0].contrasenaTrabajador ,"jon");
+    lt.listaTrabajadores[0].NSS = 1;
+    lt.listaTrabajadores[0].numTrabajador = 2;
+    lt.numeroTrabajadores = 1;
+
+    printf("%s,%s,%s,%s,%d,%d\n", lt.listaTrabajadores[0].NombreTrabajador,lt.listaTrabajadores[0].ApellidoTrabajador,lt.listaTrabajadores[0].correoTrabajador,lt.listaTrabajadores[0].contrasenaTrabajador,lt.listaTrabajadores[0].NSS,lt.listaTrabajadores[0].numTrabajador);
+    fflush(stdout);
+
+    lu.listaUsuarios[0].NombreUsuario = "Jon";
+    lu.listaUsuarios[0].ApellidoUsuario = "eizaguirre";
+    lu.listaUsuarios[0].correoUsuario = "j@gmail.com";
+    lu.listaUsuarios[0].contrasenyaUsuario = "jon";
+    lu.listaUsuarios[0].numeroTelefono = 124354689;
+    lu.numeroUsuarios = 1;
+   
+    int i = iniciarSesion(lt,lu);
+    printf("");
 
     /*char opcion,opcion2;
     do{

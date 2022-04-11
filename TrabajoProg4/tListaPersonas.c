@@ -22,7 +22,7 @@ inicioSesion datosSesion(){
 
     return inicio;    
 }
-
+/*
 registro datosRegistro(){
     registro regis;
     char nombre[100];
@@ -56,14 +56,18 @@ registro datosRegistro(){
     strcpy(regis.apellido, apellido);
     strcpy(regis.correo, correo);
     strcpy(regis.contrasena, contrasena);
-    strcpy(regis.tlf, tlf); /**/
+    strcpy(regis.tlf, tlf); 
 
 
     return regis;    
-}
+}*/
 
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
+    printf("Entra");
+    fflush(stdout);
     inicioSesion sesion = datosSesion();
+    printf("Sale");
+    fflush(stdout);
     int res;
 
     for(int i = 0; i<lt.numeroTrabajadores; i++){
@@ -95,12 +99,12 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
 }
 
 int registrar(tListaUsuarios lu){
-    registro sesion = datosRegistro();
+    Usuario sesion = datosUsuario();
     int res;
 
     for(int i = 0; i<lu.numeroUsuarios; i++){
-        if(strcmp(sesion.correo, lu.listaUsuarios[i].correoUsuario)==0){
-            if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
+        if(strcmp(sesion.correoUsuario, lu.listaUsuarios[i].correoUsuario)==0){
+            if (strcmp(sesion.contrasenyaUsuario, lu.listaUsuarios[i].contrasenyaUsuario)==0){
                 printf("Este usuario ya existe");
                 fflush(stdout);
                 res = 2;    
