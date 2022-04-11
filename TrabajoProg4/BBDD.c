@@ -299,5 +299,60 @@ int borrarTodasReservas(sqlite3 *db) {
 	return SQLITE_OK;
 }
 
+int visualizarReservas(sqlite3 *db) {
+	sqlite3_stmt *stmt;
+
+	char sql[] = "select Id, habitacion, tlf, nom_hotel, correo_cliente, fecha_entrada, fecha_salida from reserva";
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (SELECT)\n");
+
+	int id;
+	int habitacion;
+	int tlf; 
+	char nom_hotel[100]; 
+	char correo_cliente[100]; 
+	char fecha_entrada[11]; 
+	char fecha_salida[11];
+
+	printf("\n");
+	printf("\n");
+	printf("Reservas:\n");
+	do {
+		result = sqlite3_step(stmt) ;
+		if (result == SQLITE_ROW) {
+			id = sqlite3_column_int(stmt, 0);
+			habitacion = sqlite3_column_int(stmt, 1);
+			tlf = sqlite3_column_int(stmt, 2);
+			strcpy(nom_hotel, (char *) sqlite3_column_text(stmt, 3));
+			strcpy(correo_cliente, (char *) sqlite3_column_text(stmt, 4));
+			strcpy(fecha_entrada, (char *) sqlite3_column_text(stmt, 5));
+			strcpy(fecha_salida, (char *) sqlite3_column_text(stmt, 6));
+
+			printf("ID: %d Habitacion: %d Tlf: %d Hotel: %s Correo: %s Fecha de entrada: %d Fecha de salida: %s\n", id, habitacion, tlf, nom_hotel, correo_cliente, fecha_entrada, fecha_salida);
+		}
+	} while (result == SQLITE_ROW);
+
+	printf("\n");
+	printf("\n");
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (SELECT)\n");
+
+	return SQLITE_OK;
+}
+
 
 
