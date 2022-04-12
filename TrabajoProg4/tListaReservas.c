@@ -3,6 +3,7 @@
 #include "stdlib.h"
 #include "string.h"
 
+
 void anadirReserva(Reserva reserva, tListaReservas *lr){
     Reserva *auxiliar;
     int i;
