@@ -11,7 +11,6 @@ int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu);
 int insertarNuevoUsuario(sqlite3 *db, Usuario user);
 void mostrarHoteles(sqlite3 *db);
 void insertarHotel(sqlite3 *db, Hotel h);
-void borrarHotel(sqlite3 *db, char *nombre);
 void insertarUsuario(sqlite3 *db, int, char*);
 void mostrarReservas(sqlite3 *db, Reserva r);
 int visualizarHoteles(sqlite3 *db);

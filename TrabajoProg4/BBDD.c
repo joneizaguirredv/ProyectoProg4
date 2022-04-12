@@ -1,10 +1,11 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include <string.h>
 #include "BBDD.h"
 #include "sqlite3.h"
 
 
-void crearTablas(sqlite3 *db){
+/*void crearTablas(sqlite3 *db){
 	sqlite3_stmt *stmt;
 
 	char sql[] = "DROP TABLE IF EXISTS hotel"
@@ -19,37 +20,37 @@ void crearTablas(sqlite3 *db){
 
 
 
-	/*int result = */sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	/*if (result != SQLITE_OK) {
+	/*int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
 		printf("Error preparing statement (SELECT)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
 
-	printf("SQL query prepared (SELECT)\n");*/
-	/*result = */sqlite3_step(stmt); //Ejecuta la sentencia
-	/*if (result != SQLITE_DONE) {
+	printf("SQL query prepared (SELECT)\n");
+	result = sqlite3_step(stmt); Ejecuta la sentencia
+	if (result != SQLITE_DONE) {
 		printf("Error creating table\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
-	}*/
-	/*result = */sqlite3_finalize(stmt);
-	/*if (result != SQLITE_OK) {
+	}
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
 		printf("Error finalizing statement (DELETE)\n");
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
 
 	printf("Prepared statement finalized (DELETE)\n");
-	*/
+	
 	//return SQLITE_OK;
 
-}
+}*/
 
 int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu){
 	sqlite3_stmt *stmt;
 	char sql[100];
-	sprintf(sql, "select count(*) from persona");
+	sprintf(sql, "select count(*) from usuario");
 	
 	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
 
@@ -65,7 +66,7 @@ int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu){
 	lu->listaUsuarios = (Usuario*) malloc (lu->numeroUsuarios*sizeof(Usuario));
 
 	char sql2[100];
-	sprintf(sql2, "select * from persona");
+	sprintf(sql2, "select * from usuario");
 	sqlite3_prepare_v2(db,sql2,-1,&stmt,NULL);
 
 
