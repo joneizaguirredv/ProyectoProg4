@@ -55,21 +55,25 @@ int main(void){
 		printf("Error opening database\n");
 		return result;
 	}
-    tListaHoteles hoteles;
+    /*tListaHoteles hoteles;
     tListaUsuarios lu;
     tListaTrabajadores lt;
     inicializarListas(&lt, &lu, db);
+    int x = cargarHoteles(db, &hoteles);
     //int i = cargarUsuarios(db, &lu);
-    for(int i=0;i<lu.numeroUsuarios;i++){
-        printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+    for(int i=0;i<hoteles.numHoteles;i++){
+        printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
         fflush(stdout);
+        //printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+        //fflush(stdout);
     }
-    for(int i=0;i<lu.numeroUsuarios;i++){
-        printf("%s, %s, %s, %s, %d, %d \n", lt.listaTrabajadores[i].NombreTrabajador, lt.listaTrabajadores[i].ApellidoTrabajador, lt.listaTrabajadores[i].correoTrabajador, lt.listaTrabajadores[i].contrasenaTrabajador,lt.listaTrabajadores[i].NSS, lt.listaTrabajadores[i].numTrabajador);
-        fflush(stdout);
+    for(int i=0;i<lt.numeroTrabajadores;i++){
+        //printf("%s, %s, %s, %s, %d, %d \n", lt.listaTrabajadores[i].NombreTrabajador, lt.listaTrabajadores[i].ApellidoTrabajador, lt.listaTrabajadores[i].correoTrabajador, lt.listaTrabajadores[i].contrasenaTrabajador,lt.listaTrabajadores[i].NSS, lt.listaTrabajadores[i].numTrabajador);
+        //fflush(stdout);
+
     }
-    int x = registrar(&lu, db);
-    printf("%d",x);
+    //int y = registrar(&lu, db);
+    //printf("%d",y);
     /*leerFichero(&hoteles);
     anadirHotel(&hoteles);
     for(int i = 0; i < hoteles.numHoteles; i++){
@@ -118,21 +122,41 @@ int main(void){
     //int i = registrar(&lu);
     //printf("%d", i);
 
-    /*char opcion,opcion2;
+
+    char opcion;
+    char opcion2;
+    tListaTrabajadores lt;
+    tListaUsuarios lu;
+    inicializarListas(&lt, &lu, db);
+
+    for(int i=0;i<lu.numeroUsuarios;i++){
+        //printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
+        //fflush(stdout);
+        printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+        fflush(stdout);
+    }
+
+
     do{
         opcion = menuInicial();
         switch (opcion)
+
         {
             
-        case '1': 
+        case '1':
+
                 do{
-                    opcion2 = menuCliente();
+                    opcion2 = iniciarSesion(lt,lu);
+                    printf("Res: %d", opcion2);
                     switch(opcion2){
-                        case '1': break;
-                        case '5': printf("Volviendo al menu principal..."); break;
+                        case 1:
+                            menuTrabajador();
+                        case 2:
+                            menuCliente();
+                        case 3: menuInicial(); break;
                         default: printf("La opción seleccionada no es correcta\n");
                     }
-                }while(opcion2 != '5');
+                }while(opcion2 != 1 || opcion2 != 2 || opcion2 != 3);
             break;
 
 
@@ -152,6 +176,6 @@ int main(void){
         default: printf("La opcion seleccionada no es correcta\n");
             break;
         }
-    }while (opcion !='0');*/
+    }while (opcion !='0');
     return 0;
 }
