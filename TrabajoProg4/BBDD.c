@@ -527,5 +527,68 @@ int visualizarReservas(sqlite3 *db) {
 	return SQLITE_OK;
 }
 
+int insertarNuevoHotel(sqlite3 *db, Hotel hotel){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("insert into hotel values ('%q', '%q', '%q', '%q', %i, %f);", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.numEstrellas, hotel.valoracionMedia);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
+
+int insertarNuevaReserva(sqlite3 *db, Reserva reserva){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("insert into reserva values (%i, %i, '%q', '%q', '%q', '%q');", reserva.tipoHabitacion, reserva.tlf, reserva.correoUsuario, reserva.nombreHotel, reserva.fechaEntrada, reserva.fechaSalida);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
 
 
