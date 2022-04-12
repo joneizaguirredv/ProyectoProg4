@@ -692,4 +692,3 @@ int insertarNuevaReserva(sqlite3 *db, Reserva reserva){
 	return SQLITE_OK;
 }
 
-

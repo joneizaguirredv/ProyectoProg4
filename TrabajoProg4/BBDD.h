@@ -6,6 +6,7 @@
 #include "reserva.h"
 #include "tListaPersonas.h"
 #include "tListaHotel.h"
+#include "tListaReserva.h"
 
 void crearTablas(sqlite3 *db);
 int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu);
