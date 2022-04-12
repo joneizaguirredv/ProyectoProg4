@@ -21,6 +21,7 @@ void mostrarReservas(sqlite3 *db, Reserva r);
 int visualizarHoteles(sqlite3 *db);
 int borrarTodosHoteles(sqlite3 *db);
 int borrarTodosTrabajadores(sqlite3 *db);
+int visualizarTrabajadores(sqlite3 *db);
 int borrarTodosUsuarios(sqlite3 *db);
 int borrarTodasReservas(sqlite3 *db);
 int visualizarReservas(sqlite3 *db);
