@@ -3,7 +3,13 @@
 #include "stdlib.h"
 #include "string.h"
 
+<<<<<<< HEAD
 void modificarReserva(tListaReservas* tlr){
+=======
+
+void anadirReserva(Reserva reserva, tListaReservas *lr){
+    Reserva *auxiliar;
+>>>>>>> 4874ca1a17d21f115c048f5ae3c5ed8277c9ba98
     int i;
     char nombre[100];
     //char correoUsuario[50];
