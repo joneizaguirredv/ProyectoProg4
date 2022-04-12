@@ -81,8 +81,8 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     }
 
     while(enc1 ==0 && enc2==0 && cInc1==0 && cInc2==0 && x<lu.numeroUsuarios){
-        if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
-            if (strcmp(sesion.contrasena, lu.listaUsuarios[i].contrasenyaUsuario)==0){
+        if (strcmp(sesion.contrasena, lu.listaUsuarios[x].contrasenyaUsuario)==0){
+            if (strcmp(sesion.contrasena, lu.listaUsuarios[x].contrasenyaUsuario)==0){
                 printf("Eres un usuario");
                 fflush(stdout);
                 enc2=1;
