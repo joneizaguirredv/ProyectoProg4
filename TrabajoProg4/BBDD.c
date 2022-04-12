@@ -114,9 +114,78 @@ int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu){
 
 }
 
+int cargarTrabajadores(sqlite3 *db, tListaTrabajadores *lt){
+	sqlite3_stmt *stmt;
+	char sql[100];
+	sprintf(sql, "select count(*) from trabajador");
+	
+	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	sqlite3_step(stmt);
+	lt->numeroTrabajadores = sqlite3_column_int(stmt,0);
+
+	lt->listaTrabajadores = (Trabajador*) malloc (lt->numeroTrabajadores*sizeof(Trabajador));
+
+	char sql2[100];
+	sprintf(sql2, "select * from trabajador");
+	sqlite3_prepare_v2(db,sql2,-1,&stmt,NULL);
+
+
+	char nombre[100];
+	char apellido[100];
+	char correo[100];
+	char contrasena[100];
+	int numTrabador;
+	int NSS;
+	int counter = 0;
+
+	do{
+		if(sqlite3_step(stmt) == SQLITE_ROW){
+			lt->listaTrabajadores[counter].NombreTrabajador = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,0)));
+			lt->listaTrabajadores[counter].ApellidoTrabajador = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,1)));
+			lt->listaTrabajadores[counter].correoTrabajador = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,2)));
+			lt->listaTrabajadores[counter].contrasenaTrabajador = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,3)));
+
+			/*strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
+			strcpy(apellido, (char*) sqlite3_column_text(stmt,1));
+			strcpy(correo, (char*) sqlite3_column_text(stmt,2));
+			strcpy(contrasena, (char*) sqlite3_column_text(stmt,3));
+			telefono = sqlite3_column_int(stmt,4);*/
+
+			strcpy(lt->listaTrabajadores[counter].NombreTrabajador , (char*) sqlite3_column_text(stmt,0));
+			strcpy(lt->listaTrabajadores[counter].ApellidoTrabajador , (char*) sqlite3_column_text(stmt,1));
+			strcpy(lt->listaTrabajadores[counter].correoTrabajador , (char*) sqlite3_column_text(stmt,2));
+			strcpy(lt->listaTrabajadores[counter].contrasenaTrabajador , (char*) sqlite3_column_text(stmt,3));
+			lt->listaTrabajadores[counter].NSS = sqlite3_column_int(stmt,4);
+			lt->listaTrabajadores[counter].numTrabajador = sqlite3_column_int(stmt,5);
+			counter++;
+			
+		}else{
+			break;
+		}
+	}while(counter<lt->numeroTrabajadores);
+
+	result = sqlite3_finalize(stmt);
+
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	return SQLITE_OK;
+}
+
+
 int insertarNuevoUsuario(sqlite3 *db, Usuario user){
 	sqlite3_stmt *stmt;
-	char *sql = sqlite3_mprintf("insert into persona values ('%q', '%q', '%q', '%q', %i);", user.NombreUsuario, user.ApellidoUsuario, user.correoUsuario, user.contrasenyaUsuario, user.numeroTelefono);
+	char *sql = sqlite3_mprintf("insert into usuario values ('%q', '%q', '%q', '%q', %i);", user.NombreUsuario, user.ApellidoUsuario, user.correoUsuario, user.contrasenyaUsuario, user.numeroTelefono);
 
 
 	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;

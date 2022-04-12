@@ -6,6 +6,7 @@
 #include "hotel.h"
 #include "reserva.h"
 #include "menu.h"
+#include "sqlite3.h"
 
 
 typedef struct{
@@ -32,7 +33,7 @@ typedef struct{
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu);
 inicioSesion datosSesion();
 void anadirPersona(Usuario user, tListaUsuarios *lt);
-int registrar(tListaUsuarios* lu);
+//int registrar(tListaUsuarios* lu, sqlite3 *db);
 
 
 

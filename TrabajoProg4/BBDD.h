@@ -8,6 +8,7 @@
 
 void crearTablas(sqlite3 *db);
 int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu);
+int cargarTrabajadores(sqlite3 *db, tListaTrabajadores *lt);
 int insertarNuevoUsuario(sqlite3 *db, Usuario user);
 void mostrarHoteles(sqlite3 *db);
 void insertarHotel(sqlite3 *db, Hotel h);

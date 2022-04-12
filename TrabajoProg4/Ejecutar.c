@@ -8,6 +8,7 @@
 #include "tListaReserva.h"
 #include "BBDD.h"
 #include "sqlite3.h"
+#include "funcionesBBDD.h"
 
 
 
@@ -56,11 +57,19 @@ int main(void){
 	}
     tListaHoteles hoteles;
     tListaUsuarios lu;
-    int i = cargarUsuarios(db, &lu);
+    tListaTrabajadores lt;
+    inicializarListas(&lt, &lu, db);
+    //int i = cargarUsuarios(db, &lu);
     for(int i=0;i<lu.numeroUsuarios;i++){
-        printf("%s, %s, %s, %s, %d", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+        printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
         fflush(stdout);
     }
+    for(int i=0;i<lu.numeroUsuarios;i++){
+        printf("%s, %s, %s, %s, %d, %d \n", lt.listaTrabajadores[i].NombreTrabajador, lt.listaTrabajadores[i].ApellidoTrabajador, lt.listaTrabajadores[i].correoTrabajador, lt.listaTrabajadores[i].contrasenaTrabajador,lt.listaTrabajadores[i].NSS, lt.listaTrabajadores[i].numTrabajador);
+        fflush(stdout);
+    }
+    int x = registrar(&lu, db);
+    printf("%d",x);
     /*leerFichero(&hoteles);
     anadirHotel(&hoteles);
     for(int i = 0; i < hoteles.numHoteles; i++){

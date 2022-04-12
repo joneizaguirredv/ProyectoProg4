@@ -83,7 +83,7 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     }
 }
 
-int registrar(tListaUsuarios *lu){
+/*int registrar(tListaUsuarios *lu, sqlite3 *db){
     Usuario sesion = datosUsuario();
     int i,res,enc=0;
 
@@ -98,7 +98,7 @@ int registrar(tListaUsuarios *lu){
         fflush(stdout);
         res = 2;
     }else{
-        anadirPersona(sesion, lu);
+        insertarNuevoUsuario(db, sesion);
         printf("¡Usuario creado correctamente!");
         res = 1;
     }
@@ -116,8 +116,8 @@ int registrar(tListaUsuarios *lu){
             res = 1;
         }   
 
-    }*/   
-}
+    }   
+}*/
 
 
 
