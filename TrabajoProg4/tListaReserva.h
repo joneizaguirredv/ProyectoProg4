@@ -1,5 +1,5 @@
-#ifndef TLISTARESERVAS_H_
-#define TLISTARESERVAS_H_
+#ifndef TLISTARESERVA_H_
+#define TLISTARESERVA_H_
 
 #include "usuario.h"
 #include "trabajador.h"
@@ -12,7 +12,7 @@ typedef struct{
 
 }tListaReservas;
 
-
+void modificarReserva(tListaReservas* tlr);
 void anadirReserva(Reserva reserva, tListaReservas *lr);
 void borrarReserva(tListaReservas* tr);
 
