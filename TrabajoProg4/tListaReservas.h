@@ -12,5 +12,7 @@ typedef struct{
 
 }tListaReservas;
 
+void anadirReserva(Reserva reserva, tListaReservas *lr);
+
 #endif
 
