@@ -10,4 +10,5 @@ void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db);
 int registrar(tListaUsuarios *lu, sqlite3 *db);
 
 
+
 #endif

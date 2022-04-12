@@ -183,6 +183,75 @@ int cargarTrabajadores(sqlite3 *db, tListaTrabajadores *lt){
 }
 
 
+int cargarHoteles(sqlite3 *db, tListaHoteles *lh){
+	sqlite3_stmt *stmt;
+	char sql[100];
+	sprintf(sql, "select count(*) from hotel");
+	
+	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	sqlite3_step(stmt);
+	lh->numHoteles = sqlite3_column_int(stmt,0);
+
+	lh->listaHoteles = (Hotel*) malloc (lh->numHoteles*sizeof(Hotel));
+
+	char sql2[100];
+	sprintf(sql2, "select * from hotel");
+	sqlite3_prepare_v2(db,sql2,-1,&stmt,NULL);
+
+
+	char compania[100];
+	char nombre[100];
+	char municipio[100];
+	char provincia[100];
+	int numEstrellas;
+	int valoracionMedia;
+	int counter = 0;
+
+	do{
+		if(sqlite3_step(stmt) == SQLITE_ROW){
+			lh->listaHoteles[counter].Compania = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,0)));
+			lh->listaHoteles[counter].Nombre = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,1)));
+			lh->listaHoteles[counter].Municipio = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,2)));
+			lh->listaHoteles[counter].Provincia = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,3)));
+
+			/*strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
+			strcpy(apellido, (char*) sqlite3_column_text(stmt,1));
+			strcpy(correo, (char*) sqlite3_column_text(stmt,2));
+			strcpy(contrasena, (char*) sqlite3_column_text(stmt,3));
+			telefono = sqlite3_column_int(stmt,4);*/
+
+			strcpy(lh->listaHoteles[counter].Compania , (char*) sqlite3_column_text(stmt,0));
+			strcpy(lh->listaHoteles[counter].Nombre , (char*) sqlite3_column_text(stmt,1));
+			strcpy(lh->listaHoteles[counter].Municipio , (char*) sqlite3_column_text(stmt,2));
+			strcpy(lh->listaHoteles[counter].Provincia , (char*) sqlite3_column_text(stmt,3));
+			lh->listaHoteles[counter].numEstrellas = sqlite3_column_int(stmt,4);
+			lh->listaHoteles[counter].valoracionMedia = sqlite3_column_int(stmt,5);
+			counter++;
+			
+		}else{
+			break;
+		}
+	}while(counter<lh->numHoteles);
+
+	result = sqlite3_finalize(stmt);
+
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	return SQLITE_OK;
+}
+
+
 int insertarNuevoUsuario(sqlite3 *db, Usuario user){
 	sqlite3_stmt *stmt;
 	char *sql = sqlite3_mprintf("insert into usuario values ('%q', '%q', '%q', '%q', %i);", user.NombreUsuario, user.ApellidoUsuario, user.correoUsuario, user.contrasenyaUsuario, user.numeroTelefono);
@@ -215,6 +284,38 @@ int insertarNuevoUsuario(sqlite3 *db, Usuario user){
 	return SQLITE_OK;
 }
 
+
+int insertarHoteles(sqlite3 *db, Hotel hotel){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("insert into usuario values ('%q', '%q', '%q', '%q', %i, %i);", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.Provincia, hotel.numEstrellas, hotel.valoracionMedia);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
 
 
 

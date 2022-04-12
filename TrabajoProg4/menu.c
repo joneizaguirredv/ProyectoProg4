@@ -20,7 +20,7 @@ char menuInicial(){
 
 char menuTrabajador(){
     char opcion;
-    printf("1. Borrar un hotel\n");
+    printf("\n1. Borrar un hotel\n");
     printf("2. Añadir un hotel\n");
     printf("3. Modificar un hotel\n");
     printf("4. Visualizar un hotel\n");
@@ -35,7 +35,7 @@ char menuTrabajador(){
 
 char menuCliente(){
     char opcion;
-    printf("1. Visualizar hoteles\n");
+    printf("\n1. Visualizar hoteles\n");
     printf("2. Reservar un hotel\n");
     printf("3. Modificar un hotel\n");
     printf("4. Visualizar reservas\n");

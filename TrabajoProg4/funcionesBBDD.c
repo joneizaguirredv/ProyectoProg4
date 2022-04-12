@@ -10,6 +10,8 @@ void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db){
 }
 
 int registrar(tListaUsuarios *lu, sqlite3 *db){
+    printf("Entra");
+    fflush(stdout);
     Usuario sesion = datosUsuario();
     int i,res,enc=0;
 
