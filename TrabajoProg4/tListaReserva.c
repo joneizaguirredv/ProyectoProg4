@@ -3,6 +3,8 @@
 #include "stdlib.h"
 #include "string.h"
 
+/*
+
 void modificarReserva(tListaReservas* tlr){
     int i;
     char nombre[100];
@@ -101,3 +103,4 @@ void borrarReserva(tListaReservas* tr){
         fflush(stdout);
     }
 }
+*/

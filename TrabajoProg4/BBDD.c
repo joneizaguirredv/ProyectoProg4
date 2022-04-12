@@ -84,17 +84,17 @@ int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu){
 			lu->listaUsuarios[counter].correoUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,2)));
 			lu->listaUsuarios[counter].contrasenyaUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,3)));
 
-			strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
+			/*strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
 			strcpy(apellido, (char*) sqlite3_column_text(stmt,1));
 			strcpy(correo, (char*) sqlite3_column_text(stmt,2));
 			strcpy(contrasena, (char*) sqlite3_column_text(stmt,3));
-			telefono = sqlite3_column_int(stmt,4);
+			telefono = sqlite3_column_int(stmt,4);*/
 
-			lu->listaUsuarios[counter].NombreUsuario = nombre;
-			lu->listaUsuarios[counter].ApellidoUsuario = apellido;
-			lu->listaUsuarios[counter].correoUsuario = correo;
-			lu->listaUsuarios[counter].contrasenyaUsuario = contrasena;
-			lu->listaUsuarios[counter].numeroTelefono = telefono;
+			strcpy(lu->listaUsuarios[counter].NombreUsuario , (char*) sqlite3_column_text(stmt,0));
+			strcpy(lu->listaUsuarios[counter].ApellidoUsuario , (char*) sqlite3_column_text(stmt,1));
+			strcpy(lu->listaUsuarios[counter].correoUsuario , (char*) sqlite3_column_text(stmt,2));
+			strcpy(lu->listaUsuarios[counter].contrasenyaUsuario , (char*) sqlite3_column_text(stmt,3));
+			lu->listaUsuarios[counter].numeroTelefono = sqlite3_column_int(stmt,4);
 			counter++;
 			
 		}else{

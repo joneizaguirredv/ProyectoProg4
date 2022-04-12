@@ -7,6 +7,7 @@
 #include "tListaPersonas.h"
 #include "tListaReserva.h"
 #include "BBDD.h"
+#include "sqlite3.h"
 
 
 
@@ -48,14 +49,14 @@ void leerFichero(tListaHoteles* lt){
 int main(void){
     sqlite3 *db;
 
-	int result = sqlite3_open("program4", &db);
+	int result = sqlite3_open("BaseDeDatos", &db);
 	if (result != SQLITE_OK) {
 		printf("Error opening database\n");
 		return result;
 	}
     tListaHoteles hoteles;
     tListaUsuarios lu;
-    int i = cargarUsuarios(&lu, db);
+    int i = cargarUsuarios(db, &lu);
     for(int i=0;i<lu.numeroUsuarios;i++){
         printf("%s, %s, %s, %s, %d", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
         fflush(stdout);
