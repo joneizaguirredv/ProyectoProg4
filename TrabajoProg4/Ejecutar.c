@@ -5,7 +5,7 @@
 #include "usuario.h"
 #include "tListaHotel.h"
 #include "tListaPersonas.h"
-#include "tListaReservas.h"
+#include "tListaReserva.h"
 #include "BBDD.h"
 
 
