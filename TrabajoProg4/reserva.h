@@ -2,8 +2,8 @@
 #define RESERVA_H_
 
 typedef struct{
-	Hotel h;
-	Usuario u;
+	char correoUsuario;
+	char nombreHotel;
 	char *tipoHabitacion;
 	char fechaEntrada[10];
 	char fechaSalida[10];

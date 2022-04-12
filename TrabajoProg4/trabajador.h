@@ -12,4 +12,6 @@ typedef struct
 
 }Trabajador;
 
+void mostrarTrbajador(Trabajador t);
+
 #endif
