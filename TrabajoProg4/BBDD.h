@@ -23,6 +23,9 @@ int borrarTodosTrabajadores(sqlite3 *db);
 int borrarTodosUsuarios(sqlite3 *db);
 int borrarTodasReservas(sqlite3 *db);
 int visualizarReservas(sqlite3 *db);
+int insertarNuevoHotel(sqlite3 *db, Hotel hotel);
+int insertarNuevaReserva(sqlite3 *db, Reserva reserva);
+
 
 
 #endif
