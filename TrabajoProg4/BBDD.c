@@ -46,6 +46,109 @@ void crearTablas(sqlite3 *db){
 
 }
 
+int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu){
+	sqlite3_stmt *stmt;
+	char sql[100];
+	sprintf(sql, "select count(*) from persona");
+	
+	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
+
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	sqlite3_step(stmt);
+	lu->numeroUsuarios = sqlite3_column_int(stmt,0);
+
+	lu->listaUsuarios = (Usuario*) malloc (lu->numeroUsuarios*sizeof(Usuario));
+
+	char sql2[100];
+	sprintf(sql2, "select * from persona");
+	sqlite3_prepare_v2(db,sql2,-1,&stmt,NULL);
+
+
+	char nombre[100];
+	char apellido[100];
+	char correo[100];
+	char contrasena[100];
+	int telefono;
+	int counter = 0;
+
+	do{
+		if(sqlite3_step(stmt) == SQLITE_ROW){
+			lu->listaUsuarios[counter].NombreUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,0)));
+			lu->listaUsuarios[counter].ApellidoUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,1)));
+			lu->listaUsuarios[counter].correoUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,2)));
+			lu->listaUsuarios[counter].contrasenyaUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,3)));
+
+			strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
+			strcpy(apellido, (char*) sqlite3_column_text(stmt,1));
+			strcpy(correo, (char*) sqlite3_column_text(stmt,2));
+			strcpy(contrasena, (char*) sqlite3_column_text(stmt,3));
+			telefono = sqlite3_column_int(stmt,4);
+
+			lu->listaUsuarios[counter].NombreUsuario = nombre;
+			lu->listaUsuarios[counter].ApellidoUsuario = apellido;
+			lu->listaUsuarios[counter].correoUsuario = correo;
+			lu->listaUsuarios[counter].contrasenyaUsuario = contrasena;
+			lu->listaUsuarios[counter].numeroTelefono = telefono;
+			counter++;
+			
+		}else{
+			break;
+		}
+	}while(counter<lu->numeroUsuarios);
+
+	result = sqlite3_finalize(stmt);
+
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	return SQLITE_OK;
+
+}
+
+int insertarNuevoUsuario(sqlite3 *db, Usuario user){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("insert into persona values ('%q', '%q', '%q', '%q', %i);", user.NombreUsuario, user.ApellidoUsuario, user.correoUsuario, user.contrasenyaUsuario, user.numeroTelefono);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into country table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
+
+
+
+
+
 void insertarUsuario(sqlite3 *db, int id, char *nom){
 	sqlite3_stmt *stmt;
 

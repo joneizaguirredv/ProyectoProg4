@@ -4,8 +4,11 @@
 #include "hotel.h"
 #include "usuario.h"
 #include "reserva.h"
+#include "tListaPersonas.h"
 
 void crearTablas(sqlite3 *db);
+int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu);
+int insertarNuevoUsuario(sqlite3 *db, Usuario user);
 void mostrarHoteles(sqlite3 *db);
 void insertarHotel(sqlite3 *db, Hotel h);
 void borrarHotel(sqlite3 *db, char *nombre);
