@@ -12,9 +12,9 @@ typedef struct{
 
 }tListaReservas;
 
-void modificarReserva(tListaReservas* tlr);
-void anadirReserva(Reserva reserva, tListaReservas *lr);
-void borrarReserva(tListaReservas* tr);
+//void modificarReserva(tListaReservas* tlr);
+//void anadirReserva(Reserva reserva, tListaReservas *lr);
+//void borrarReserva(tListaReservas* tr);
 
 #endif
 

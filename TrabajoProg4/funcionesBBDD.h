@@ -5,7 +5,8 @@
 #include "BBDD.h"
 #include "sqlite3.h"
 
-
+Reserva datosReserva();
+void insertarReserva(sqlite3 *db);
 void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db);
 void leerFichero(tListaHoteles* lt);
 int registrar(tListaUsuarios *lu, tListaTrabajadores lt, sqlite3 *db);

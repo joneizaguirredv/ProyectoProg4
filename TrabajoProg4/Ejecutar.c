@@ -126,15 +126,25 @@ int main(void){
     char opcion;
     char opcion2;
     int opcion3;
-    char *sesionActual;
+    char sesionActual[100];
     tListaTrabajadores lt;
     tListaUsuarios lu;
     inicializarListas(&lt, &lu, db);
+    insertarReserva(db);
 
     for(int i=0;i<lu.numeroUsuarios;i++){
         //printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
         //fflush(stdout);
         printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+        fflush(stdout);
+    }
+    tListaReservas lr;
+    char nombre[100] = "jon@gmail.com";
+    int x = cargarReservasDeUnUsuario(db, &lr, nombre);
+    for(int i=0;i<lr.numeroReservas;i++){
+        //printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
+        //fflush(stdout);
+        printf("%s, %s, %s, %s, %s\n", lr.listaReserva[i].correoUsuario, lr.listaReserva[i].nombreHotel, lr.listaReserva[i].tipoHabitacion, lr.listaReserva[i].fechaEntrada, lr.listaReserva[i].fechaSalida);
         fflush(stdout);
     }
     tListaHoteles lh;
@@ -163,7 +173,7 @@ int main(void){
     //fflush(stdout);
 
 
-    do{
+    /*do{
         opcion = menuInicial();
         switch (opcion)
 
@@ -173,7 +183,7 @@ int main(void){
 
                 do{
                     opcion2 = iniciarSesion(lt,lu,db);
-                    int x = cargarUsuarioActual(db, &sesionActual);
+                    int x = cargarUsuarioActual(db, sesionActual);
                     printf("\n %s\n", sesionActual);
                     fflush(stdout);
                     printf("\nRes: %d", opcion2);
@@ -218,5 +228,5 @@ int main(void){
             break;
         }
     }while (opcion !='0');
-    return 0;
+    return 0;*/
 }

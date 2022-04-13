@@ -13,6 +13,55 @@ void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db){
 
 
 
+Reserva datosReserva(){
+    Reserva res;
+    char correo[100] = "jonan";
+    char nombreHotel[100];
+    char tipoHabitacion[100];
+    char fechaEntrada[100];
+    char fechaSalida[100];
+
+    int numEstrellas;
+    printf("Introduce el nombre del hotel: ");
+    fflush(stdout);
+    fflush(stdin);
+    scanf("%s", nombreHotel);
+    do{
+        printf("Introduce el tipo de habitacion(simple o doble): ");
+        fflush(stdout);
+        fflush(stdin);
+        scanf("%s", res.tipoHabitacion);
+    }while(strcmp(res.tipoHabitacion,"simple")==1 || strcmp(res.tipoHabitacion,"doble")==1);
+
+    printf("Introduce la fecha de entrada (dd-mm-yy): ");
+    fflush(stdout);
+    fflush(stdin);
+    scanf("%s", res.fechaEntrada);
+    
+    printf("Introduce la fecha de salida (dd-mm-yy): ");
+    fflush(stdout);
+    fflush(stdin);
+    scanf("%s", res.fechaSalida);
+
+    res.correoUsuario = (char*)malloc((strlen(correo)+1)*sizeof(char));
+    res.nombreHotel = (char*)malloc((strlen(nombreHotel)+1)*sizeof(char));
+
+    strcpy(res.correoUsuario, correo);
+    strcpy(res.nombreHotel, nombreHotel);
+    printf("%s,%s,%s,%s,%s\n", res.correoUsuario, res.nombreHotel, res.tipoHabitacion, res.fechaEntrada, res.fechaSalida);
+
+    return res;
+}
+
+void insertarReserva(sqlite3 *db){
+    Reserva r = datosReserva();
+    int x = insertarNuevaReserva(db, r);
+}
+
+
+
+
+
 void leerFichero(tListaHoteles* lt){
     FILE* file;
     int i, cant;

@@ -3,7 +3,6 @@
 
 typedef struct{
 	char *correoUsuario;
-	int tlf[9];
 	char *nombreHotel;
 	char tipoHabitacion[6];
 	char fechaEntrada[10];
