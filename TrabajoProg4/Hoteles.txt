@@ -1,3 +1,51 @@
 2
 Alsa GuadalupeDeLaCosta Bilbao Vizkaya 5 7
 Alsa Guadalupe Bilbao Vizkaya 5 7
+
+
+
+/*
+
+
+#Hoteles
+
+NH  NHMadrid    Madrid  Madrid  4   8
+NH  NHGranada   Granada Granada 4   7
+NH  NHMalaga    Malaga  Malaga  4   8
+Riu RiuPlazaMayor   Madrid  Madrid  4   9
+Barcelo BarceloGranada  Granada Granada 5   8
+Barcelo BarceloValencia Valencia    Valencia    4   7
+bilboWorldwide	Zubiarte	Bilbo	Bizkaia	2	6
+bilboWorldwide	Occidental Bilbao	Donostia	Gipuzkoa	2	7
+International Fam	Carlton	Bilbo	Bizkaia	3	8
+International Fam	NH collection	Gasteiz	Araba	4	7
+International Fam	Miribilla	Donostia	Gipuzkoa	3	6
+Hoteles Black	NYX Hotel	Madrid	Madrid	5	8
+Hoteles Black	NYX Hotel	Madrid	Madrid	5	8
+Diego Ramirez	Hesperia	Logroño	La Rioja	1	2
+
+
+#Reserva
+
+101	675231198	Zubiarte	raquel18@gmail.com	18/10/2022	25/10/2022
+140	699482001	Carlton	itsasnelopez@gmail.com	01/06/2022	01/06/2022
+215	688642930	Zubiarte	iratiseco@urretxindorra.eus	23/11/2022	29/11/2022
+129	640202021	Miribilla	gipusin@gmai.com	08/08/2022	12/08/2022
+
+
+#Trabajadores
+
+Leire	Uzin	Leire18@gmail.com	91806083439	01
+Mery	Perez	Peerreezz@opendeusto.es	70923417003	02
+Erlantz	Gallastegi	Gallas1_@gmail.com	42133490231	03
+
+
+#Usuario
+
+Jon	Eizaguirre	joneizaguirre@opendeusto.es	690123120
+JonAnder	Gallastegi	jonandergallastegi@opendeusto.es	612446412
+Asier	Iturriotz	asieriturriotz@opendeusto.es	688642913
+Iker	Godoy	ikergodoy@opendeusto.es	644203121
+
+
+*/

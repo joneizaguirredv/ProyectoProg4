@@ -30,10 +30,8 @@ typedef struct{
 
 
 
-//int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu);
 inicioSesion datosSesion();
 void anadirPersona(Usuario user, tListaUsuarios *lt);
-//int registrar(tListaUsuarios* lu, sqlite3 *db);
 
 
 

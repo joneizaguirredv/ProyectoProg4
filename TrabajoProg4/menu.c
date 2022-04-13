@@ -119,7 +119,6 @@ Usuario datosUsuario(){
     strcpy(user.correoUsuario, correo);
     strcpy(user.contrasenyaUsuario, contrasenya);
     user.numeroTelefono = telefono;
-    //printf("%s,%s,%s,%s,%d", user.NombreUsuario, user.ApellidoUsuario, user.correoUsuario, user.contrasenyaUsuario, user.numeroTelefono);
 
     return user;
 }
