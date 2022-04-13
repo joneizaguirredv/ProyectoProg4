@@ -890,3 +890,35 @@ int insertarNuevaReserva(sqlite3 *db, Reserva reserva){
 	return SQLITE_OK;
 }
 
+int modificarReserva(sqlite3 *db, char* fechaEntrada, char* fechaSalida, char* dato, char* modificacion){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("update reserva set '%q'= '%q' where fechaEntrada= '%q' and fechaSalida= '%q';", dato, modificacion, fechaEntrada, fechaSalida);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (UPDATE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (UPDATE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error updating data from reserva table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (UPDATE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (UPDATE)\n");
+
+	return SQLITE_OK;
+}
+
