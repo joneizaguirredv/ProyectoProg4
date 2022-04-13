@@ -174,7 +174,7 @@ int main(void){
     //fflush(stdout);
 
 
-    /*do{
+    do{
         opcion = menuInicial();
         switch (opcion)
 
@@ -231,6 +231,7 @@ int main(void){
         default: printf("La opcion seleccionada no es correcta\n");
             break;
         }
-    }while (opcion !='0');*/
+    }while (opcion !='0');
     return 0;
 }
+

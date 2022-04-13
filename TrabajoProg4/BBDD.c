@@ -771,65 +771,6 @@ int borrarTodasReservas(sqlite3 *db) {
 	return SQLITE_OK;
 }
 
-/*trabajadores(Id INTEGER PRIMARY KEY, nombre_administrador varchar(20), apellido_administrador varchar(20), correo varchar(40), nss int(11), numTrabajador varchar(20)"; */
-
-int visualizarTrabajadores(sqlite3 *db){
-	
-	sqlite3_stmt *stmt;
-
-	char sql[] = "select Id, nombre_administrador, apellido_administrador, correo, nss, numTrabajador";
-
-	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
-	if (result != SQLITE_OK) {
-		printf("Error preparing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
-
-	printf("SQL query prepared (SELECT)\n");
-
-	int id;
-	char nombre_administrador[20];
-	char apellido_administrador[20];
-	char correo[40];
-	int nss;
-	char numTrabajador[20];
-
-	printf("\n");
-	printf("\n");
-	printf("Lista de trabajadores:\n");
-	do {
-		result = sqlite3_step(stmt) ;
-		if (result == SQLITE_ROW) {
-			id = sqlite3_column_int(stmt, 0);
-			strcpy(nombre_administrador, (char *) sqlite3_column_text(stmt,1));
-			strcpy(apellido_administrador, (char *) sqlite3_column_text(stmt, 2));
-			strcpy(correo, (char *) sqlite3_column_text(stmt, 3));
-			nss = sqlite3_column_int(stmt, 4);
-			strcpy(numTrabajador, (char *) sqlite3_column_text(stmt, 5));
-
-			printf("ID: %d Nombre de administrador: %s Apellido de administrador: %s Correo: %s Nss:  %d Numero de trabajador: %s\n", id, nombre_administrador, apellido_administrador, correo,  nss, numTrabajador);
-		}
-	} while (result == SQLITE_ROW);
-
-	printf("\n");
-	printf("\n");
-
-	result = sqlite3_finalize(stmt);
-	if (result != SQLITE_OK) {
-		printf("Error finalizing statement (SELECT)\n");
-		printf("%s\n", sqlite3_errmsg(db));
-		return result;
-	}
-
-	printf("Prepared statement finalized (SELECT)\n");
-
-	return SQLITE_OK;
-}
-
-
-
-
 int visualizarReservas(sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
