@@ -173,7 +173,7 @@ int main(void){
     //fflush(stdout);
 
 
-    /*do{
+    do{
         opcion = menuInicial();
         switch (opcion)
 
@@ -228,5 +228,5 @@ int main(void){
             break;
         }
     }while (opcion !='0');
-    return 0;*/
+    return 0; 
 }
