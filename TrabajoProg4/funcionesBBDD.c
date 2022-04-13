@@ -31,7 +31,7 @@ Reserva datosReserva(){
         fflush(stdout);
         fflush(stdin);
         scanf("%s", res.tipoHabitacion);
-    }while(strcmp(res.tipoHabitacion,"simple")==1 || strcmp(res.tipoHabitacion,"doble")==1);
+    }while(strcmp(res.tipoHabitacion,"simple")==1 && strcmp(res.tipoHabitacion,"doble")==1);
 
     printf("Introduce la fecha de entrada (dd-mm-yy): ");
     fflush(stdout);
