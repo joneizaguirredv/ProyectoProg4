@@ -22,7 +22,6 @@ int modificarHotel(sqlite3 *db, char* nombre, char* dato, char* modificacion);
 void mostrarHoteles(sqlite3 *db);
 void insertarUsuario(sqlite3 *db, int, char*);
 void mostrarReservas(sqlite3 *db, Reserva r);
-//int visualizarHoteles(sqlite3 *db);
 int borrarTodosHoteles(sqlite3 *db);
 int borrarTodosTrabajadores(sqlite3 *db);
 int borrarTodosUsuarios(sqlite3 *db);
