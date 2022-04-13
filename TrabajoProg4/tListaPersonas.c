@@ -49,7 +49,7 @@ void anadirPersona(Usuario user, tListaUsuarios *lt){
 
 
 
-int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
+/*int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     fflush(stdout);
     inicioSesion sesion = datosSesion();
     fflush(stdout);
@@ -81,7 +81,7 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     }
 
     while(enc1 ==0 && enc2==0 && cInc1==0 && cInc2==0 && x<lu.numeroUsuarios){
-        if (strcmp(sesion.contrasena, lu.listaUsuarios[x].contrasenyaUsuario)==0){
+        if (strcmp(sesion.correo, lu.listaUsuarios[x].correoUsuario)==0){
             if (strcmp(sesion.contrasena, lu.listaUsuarios[x].contrasenyaUsuario)==0){
                 printf("Eres un usuario");
                 fflush(stdout);
@@ -127,10 +127,11 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
             fflush(stdout);
             res = 3;
         }   
-    }*/
+    }
 
     if(enc1==1){
         res = 1;//Trabajador
+        int x = insertarUsuarioActual();
     }else if(enc2==1){
         res=2;
 
@@ -144,7 +145,7 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu){
     }
 
     return res;
-}
+}*/
 
 /*int registrar(tListaUsuarios *lu, sqlite3 *db){
     Usuario sesion = datosUsuario();

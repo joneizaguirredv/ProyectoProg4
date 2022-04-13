@@ -57,7 +57,13 @@ Hotel datosHotel(){
     return hotel;
 }
 
-void anadirHotel(tListaHoteles* tl){
+
+
+
+
+
+
+/*void anadirHotel(tListaHoteles* tl){
 
     Hotel hotel = datosHotel();
     Hotel *auxiliar;
@@ -133,7 +139,7 @@ void borrarHotel(tListaHoteles* tl){
             fflush(stdout);
         
     }
-}
+}*/
 
 
 

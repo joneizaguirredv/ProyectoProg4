@@ -247,6 +247,7 @@ int cargarHoteles(sqlite3 *db, tListaHoteles *lh){
 		printf("%s\n", sqlite3_errmsg(db));
 		return result;
 	}
+	printf("%d", lh->numHoteles);
 
 	return SQLITE_OK;
 }
@@ -285,9 +286,67 @@ int insertarNuevoUsuario(sqlite3 *db, Usuario user){
 }
 
 
-int insertarHoteles(sqlite3 *db, Hotel hotel){
+int insertarUsuarioActual(sqlite3 *db, char* usuario){
 	sqlite3_stmt *stmt;
-	char *sql = sqlite3_mprintf("insert into usuario values ('%q', '%q', '%q', '%q', %i, %i);", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.Provincia, hotel.numEstrellas, hotel.valoracionMedia);
+	char *sql = sqlite3_mprintf("insert into usuarioactual values ('%q');", usuario);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (INSERT)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error inserting new data into usuarioActual table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (INSERT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
+
+int cargarUsuarioActual(sqlite3 *db, char **usuario){
+	sqlite3_stmt *stmt;
+	char sql[100];
+	sprintf(sql, "select * from usuarioactual");
+	
+	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
+	char correo[100];
+	(*usuario) = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,0)));
+	strcpy(correo, (char*) sqlite3_column_text(stmt,0));
+	strcpy(*usuario, correo);
+	fflush(stdout);
+
+	result = sqlite3_finalize(stmt);
+
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (SELECT)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	return SQLITE_OK;
+
+}
+
+
+
+int insertarHotel(sqlite3 *db, Hotel hotel){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("insert into hotel values ('%q', '%q', '%q', '%q', %i, %i);", hotel.Compania, hotel.Nombre, hotel.Municipio, hotel.Provincia, hotel.numEstrellas, hotel.valoracionMedia);
 
 
 	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
@@ -313,6 +372,71 @@ int insertarHoteles(sqlite3 *db, Hotel hotel){
 	}
 
 	printf("Prepared statement finalized (INSERT)\n");
+
+	return SQLITE_OK;
+}
+
+int borrarHotel(sqlite3 *db, char* nombre){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("delete from hotel where nombre= '%q';", nombre);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data from hotel table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+
+	return SQLITE_OK;
+}
+
+
+int modificarHotel(sqlite3 *db, char* nombre, char* dato, char* modificacion){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("update hotel set '%q'= '%q' where nombre= '%q';", dato, modificacion,nombre);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (UPDATE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (UPDATE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error updating data from hotel table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (UPDATE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (UPDATE)\n");
 
 	return SQLITE_OK;
 }
@@ -387,7 +511,7 @@ void borrarTodasLasPersonas(sqlite3 *db){
 	sqlite3_finalize(stmt);
 }
 
-int visualizarHoteles(sqlite3 *db) {
+/*int visualizarHoteles(sqlite3 *db) {
 	sqlite3_stmt *stmt;
 
 	char sql[] = "select id, nombre_hotel, compania, municipio, provincia, estrellas, valoracion from hotel";
@@ -439,7 +563,7 @@ int visualizarHoteles(sqlite3 *db) {
 	printf("Prepared statement finalized (SELECT)\n");
 
 	return SQLITE_OK;
-}
+}*/
 
 int borrarTodosHoteles(sqlite3 *db) {
 	sqlite3_stmt *stmt;

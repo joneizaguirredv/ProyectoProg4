@@ -6,6 +6,7 @@
 char menuInicial();
 char menuTrabajador();
 char menuCliente();
+int menuHotel();
 Usuario datosUsuario();
 
 #endif

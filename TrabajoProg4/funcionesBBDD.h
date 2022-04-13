@@ -7,8 +7,14 @@
 
 
 void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db);
-int registrar(tListaUsuarios *lu, sqlite3 *db);
-
+void leerFichero(tListaHoteles* lt);
+int registrar(tListaUsuarios *lu, tListaTrabajadores lt, sqlite3 *db);
+int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu, sqlite3 *db);
+void visualizarHoteles(tListaHoteles lh, sqlite3 *db);
+void InsertarHotel(sqlite3 *db);
+void insertarHoteles(sqlite3 *db, tListaHoteles lh);
+void BorrarHotel(tListaHoteles lh, sqlite3 *db);
+void modificarHotel2(tListaHoteles* tl, sqlite3 *db);
 
 
 #endif

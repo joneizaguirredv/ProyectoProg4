@@ -12,7 +12,7 @@
 
 
 
-void leerFichero(tListaHoteles* lt){
+/*void leerFichero(tListaHoteles* lt){
     FILE* file;
     int i, cant;
     file = fopen("Hoteles.txt", "r");
@@ -43,7 +43,7 @@ void leerFichero(tListaHoteles* lt){
         printf("Error de apertura\n");
 		fflush(stdout);
     }
-}
+}*/
 
 
 
@@ -125,6 +125,8 @@ int main(void){
 
     char opcion;
     char opcion2;
+    int opcion3;
+    char *sesionActual;
     tListaTrabajadores lt;
     tListaUsuarios lu;
     inicializarListas(&lt, &lu, db);
@@ -135,6 +137,30 @@ int main(void){
         printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
         fflush(stdout);
     }
+    tListaHoteles lh;
+    /*leerFichero(&lh);
+    for(int i=0;i<lh.numHoteles;i++){
+        int x = insertarHotel(db,lh.listaHoteles[i]);
+    }*/
+    //tListaHoteles hoteles;
+    /*insertarHoteles(db, lh);
+    visualizarHoteles(lh,db);
+    modificarHotel2(&lh,db);
+    visualizarHoteles(lh,db);
+    BorrarHotel(lh,db);
+    visualizarHoteles(lh,db);*/
+    //printf("\nHHH");
+    //fflush(stdout);
+    //char nombre[100];
+    //scanf("%s", nombre);
+    //int x = borrarHotel(db,nombre);
+    /*for(int i=0;i<lu.numeroUsuarios;i++){
+        printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
+        fflush(stdout);
+    }*/
+    //visualizarHoteles(hot,db);
+    //printf("\n %d", hot.numHoteles);
+    //fflush(stdout);
 
 
     do{
@@ -146,8 +172,11 @@ int main(void){
         case '1':
 
                 do{
-                    opcion2 = iniciarSesion(lt,lu);
-                    printf("Res: %d", opcion2);
+                    opcion2 = iniciarSesion(lt,lu,db);
+                    int x = cargarUsuarioActual(db, &sesionActual);
+                    printf("\n %s\n", sesionActual);
+                    fflush(stdout);
+                    printf("\nRes: %d", opcion2);
                     switch(opcion2){
                         case 1:
                             menuTrabajador();
@@ -162,10 +191,22 @@ int main(void){
 
 
         case '2':
-            opcion2 = menuTrabajador();
-            switch(opcion2){
-                case '1': break;
-            }
+                do{
+                    opcion3 = registrar(&lu,lt,db);
+                    printf("Res: %d", opcion3);
+                    switch(opcion3){
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        default: printf("La opción seleccionada no es correcta\n");
+                    }
+                }while(opcion3 != 1 || opcion3 != 2);
+
+
+
+
+            int res = registrar(&lu,lt,db);
             break; 
 
 

@@ -23,7 +23,7 @@ char menuTrabajador(){
     printf("\n1. Borrar un hotel\n");
     printf("2. Añadir un hotel\n");
     printf("3. Modificar un hotel\n");
-    printf("4. Visualizar un hotel\n");
+    printf("4. Visualizar hoteles\n");
     printf("5. Volver al menu anterior\n");
     printf("Opcion: \n");
     fflush(stdout);
@@ -37,7 +37,7 @@ char menuCliente(){
     char opcion;
     printf("\n1. Visualizar hoteles\n");
     printf("2. Reservar un hotel\n");
-    printf("3. Modificar un hotel\n");
+    printf("3. Modificar una reserva\n");
     printf("4. Visualizar reservas\n");
     printf("5. Cerrar sesion\n");
     printf("Opcion: \n");
@@ -58,6 +58,23 @@ char menuFiltrar(){
     fflush(stdout);
 	fflush(stdin);
     scanf("%c",&opcion);
+    return opcion;
+}
+
+int menuHotel(){
+    int opcion;
+    do{
+        printf("1. Compania\n");
+        printf("2. Nombre\n");
+        printf("3. Municipio\n");
+        printf("4. Provincia\n");
+        printf("5. Numero de estrellas\n");
+        printf("6. Media\n");
+        printf("Opcion:");
+        fflush(stdout);
+	    fflush(stdin);
+        scanf("%d",&opcion);
+    }while(opcion<1||opcion>6);
     return opcion;
 }
 
