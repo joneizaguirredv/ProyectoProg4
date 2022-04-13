@@ -324,12 +324,13 @@ int cargarUsuarioActual(sqlite3 *db, char* nombre){
 	sprintf(sql, "select correo from usuarioactual");
 	
 	int result = sqlite3_prepare_v2(db,sql,-1,&stmt,NULL);
+	result = sqlite3_step(stmt);
 	printf("Entra");
 	fflush(stdout);
 	strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
 	printf("Sale");
 	fflush(stdout);
-	result = sqlite3_step(stmt);
+	
 
 	result = sqlite3_finalize(stmt);
 

@@ -148,6 +148,10 @@ int registrar(tListaUsuarios *lu, tListaTrabajadores lt, sqlite3 *db){
     }*/   
 }
 
+void borrarTodosLosHoteles(sqlite3 *db){
+    int x = borrarTodosHoteles(db);
+}
+
 int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu, sqlite3 *db){
     fflush(stdout);
     inicioSesion sesion = datosSesion();
@@ -251,10 +255,6 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu, sqlite3 *db){
 }
 
 
-
-
-
-
 //Se printean todos los hoteles
 void visualizarHoteles(tListaHoteles lh, sqlite3 *db){
     int x = cargarHoteles(db,&lh);
@@ -273,7 +273,11 @@ void insertarHoteles(sqlite3 *db, tListaHoteles lh){
         int x = insertarHotel(db,lh.listaHoteles[i]);
     }
 }
-
+void insertarHotelesModificados(sqlite3 *db, tListaHoteles lh){
+    for(int i=0;i<lh.numHoteles;i++){
+        int x = insertarHotel(db,lh.listaHoteles[i]);
+    }
+}
 void InsertarHotel(sqlite3 *db){
     Hotel hotel = datosHotel();
     int x = insertarHotel(db, hotel);
@@ -288,7 +292,6 @@ void BorrarHotel(tListaHoteles lh, sqlite3 *db){
     scanf("%s",nombre);
     int x = borrarHotel(db,nombre);
 }
-
 
 
 void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
@@ -309,6 +312,9 @@ void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
             i++;
         }
     }
+
+    printf("Sale del while\n");
+    fflush(stdout);
     if(enc==1){
         printf("FFFFF: ");
         fflush(stdout);
@@ -443,7 +449,7 @@ void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
         printf("No se ha encontrado el hotel");
         fflush(stdout);
     }*/
-
-    insertarHoteles(db, *tl);
+    borrarTodosLosHoteles(db);
+    insertarHotelesModificados(db, *tl);
 
 }
