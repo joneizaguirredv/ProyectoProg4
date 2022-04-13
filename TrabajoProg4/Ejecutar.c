@@ -48,8 +48,6 @@ int main(void){
 
                     opcion2 = iniciarSesion(lt,lu,db);
                     int x = cargarUsuarioActual(db, sesionActual);
-                    printf("\n %s\n", sesionActual);
-                    fflush(stdout);
         
                     switch(opcion2){
                         case 1:

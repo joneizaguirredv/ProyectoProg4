@@ -8,7 +8,6 @@
 #include "tListaHotel.h"
 #include "tListaReserva.h"
 
-void crearTablas(sqlite3 *db);
 int cargarUsuarios(sqlite3 *db, tListaUsuarios *lu);
 int cargarTrabajadores(sqlite3 *db, tListaTrabajadores *lt);
 int cargarHoteles(sqlite3 *db, tListaHoteles *lh);
@@ -20,15 +19,7 @@ int insertarHotel(sqlite3 *db, Hotel hotel);
 int borrarHotel(sqlite3 *db, char* nombre);
 int borrarUsuarioActual(sqlite3 *db);
 int borrarReservasDeUnUsuario(sqlite3 *db, char* nombre);
-int modificarHotel(sqlite3 *db, char* nombre, char* dato, char* modificacion);
-void mostrarHoteles(sqlite3 *db);
-void insertarUsuario(sqlite3 *db, int, char*);
-void mostrarReservas(sqlite3 *db, Reserva r);
 int borrarTodosHoteles(sqlite3 *db);
-int borrarTodosTrabajadores(sqlite3 *db);
-int borrarTodosUsuarios(sqlite3 *db);
-int borrarTodasReservas(sqlite3 *db);
-int visualizarReservas(sqlite3 *db);
 int insertarNuevoHotel(sqlite3 *db, Hotel hotel);
 int insertarNuevaReserva(sqlite3 *db, Reserva reserva);
 

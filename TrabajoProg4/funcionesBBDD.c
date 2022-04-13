@@ -18,8 +18,7 @@ void visualizarHoteles(tListaHoteles lh, sqlite3 *db){
         printf("%s,%s,%s,%s,%d,%d\n", lh.listaHoteles[i].Compania,lh.listaHoteles[i].Nombre,lh.listaHoteles[i].Municipio,lh.listaHoteles[i].Provincia,lh.listaHoteles[i].numEstrellas,lh.listaHoteles[i].valoracionMedia);
         fflush(stdout);
     }
-    printf("Recorre\n");
-    fflush(stdout);
+    
 }
 
 
@@ -79,8 +78,6 @@ void leerFichero(tListaHoteles* lt){
     file = fopen("Hoteles.txt", "r");
     if(file!=(FILE*)NULL){
         fscanf(file, "%d",&lt->numHoteles);
-        printf("%d",lt->numHoteles);
-        fflush(stdout);
         lt->listaHoteles = (Hotel*)malloc(lt->numHoteles*sizeof(Hotel));
         for(i=0;i<lt->numHoteles;i++){
             char nombre[100];
@@ -273,14 +270,10 @@ void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
     fflush(stdout);
     fflush(stdin);
     scanf("%s",nombre);
-    printf("\n%s", nombre);
-    fflush(stdout);
-    printf("Antes de while");
-    fflush(stdout);
+
 
     while(enc==0 && i<tl->numHoteles){
-        printf("Entra al while");
-        fflush(stdout);
+
         if(strcmp(tl->listaHoteles[i].Nombre,nombre)==0){
             enc=1;
         }else{
@@ -288,11 +281,8 @@ void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
         }
     }
 
-    printf("Sale del while\n");
-    fflush(stdout);
     if(enc==1){
-        printf("FFFFF: ");
-        fflush(stdout);
+
 
         Hotel h;
         int c = menuHotel();

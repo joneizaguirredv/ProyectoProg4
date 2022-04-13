@@ -7,7 +7,7 @@
 
 char menuInicial(){
     char opcion;
-    printf("1. Iniciar sesion\n");
+    printf("\n1. Iniciar sesion\n");
     printf("2. Registrarse\n");
     printf("3. Salir de la aplicacion\n");
     printf("Opcion: \n");

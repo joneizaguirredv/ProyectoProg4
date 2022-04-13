@@ -17,7 +17,7 @@ inicioSesion datosSesion(){
 }
 
 
-void anadirPersona(Usuario user, tListaUsuarios *lt){
+/*void anadirPersona(Usuario user, tListaUsuarios *lt){
     Usuario *auxiliar;
     int i;
     auxiliar = (Usuario*)malloc(lt->numeroUsuarios*sizeof(Usuario));
@@ -36,7 +36,7 @@ void anadirPersona(Usuario user, tListaUsuarios *lt){
     free(auxiliar);
     lt->listaUsuarios[lt->numeroUsuarios] = user;
 	lt->numeroUsuarios++;
-}
+}*/
 
 
 
