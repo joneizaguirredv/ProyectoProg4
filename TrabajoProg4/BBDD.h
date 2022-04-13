@@ -18,6 +18,8 @@ int cargarUsuarioActual(sqlite3 *db, char* nombre);
 int cargarReservasDeUnUsuario(sqlite3 *db, tListaReservas *lr, char* nombre);
 int insertarHotel(sqlite3 *db, Hotel hotel);
 int borrarHotel(sqlite3 *db, char* nombre);
+int borrarUsuarioActual(sqlite3 *db);
+int borrarReservasDeUnUsuario(sqlite3 *db, char* nombre);
 int modificarHotel(sqlite3 *db, char* nombre, char* dato, char* modificacion);
 void mostrarHoteles(sqlite3 *db);
 void insertarUsuario(sqlite3 *db, int, char*);

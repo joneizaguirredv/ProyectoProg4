@@ -12,10 +12,21 @@ void inicializarListas(tListaTrabajadores *lt, tListaUsuarios *lu, sqlite3 *db){
 }
 
 
+void visualizarHoteles(tListaHoteles lh, sqlite3 *db){
+    int x = cargarHoteles(db,&lh);
+    for(int i=0;i<lh.numHoteles;i++){
+        printf("%s,%s,%s,%s,%d,%d\n", lh.listaHoteles[i].Compania,lh.listaHoteles[i].Nombre,lh.listaHoteles[i].Municipio,lh.listaHoteles[i].Provincia,lh.listaHoteles[i].numEstrellas,lh.listaHoteles[i].valoracionMedia);
+        fflush(stdout);
+    }
+    printf("Recorre\n");
+    fflush(stdout);
+}
 
-Reserva datosReserva(){
+
+
+Reserva datosReserva(sqlite3 *db, char* usuario){
     Reserva res;
-    char correo[100] = "jonan";
+    int x = cargarUsuarioActual(db, usuario);
     char nombreHotel[100];
     char tipoHabitacion[100];
     char fechaEntrada[100];
@@ -43,18 +54,18 @@ Reserva datosReserva(){
     fflush(stdin);
     scanf("%s", res.fechaSalida);
 
-    res.correoUsuario = (char*)malloc((strlen(correo)+1)*sizeof(char));
+    res.correoUsuario = (char*)malloc((strlen(usuario)+1)*sizeof(char));
     res.nombreHotel = (char*)malloc((strlen(nombreHotel)+1)*sizeof(char));
 
-    strcpy(res.correoUsuario, correo);
+    strcpy(res.correoUsuario, usuario);
     strcpy(res.nombreHotel, nombreHotel);
     printf("%s,%s,%s,%s,%s\n", res.correoUsuario, res.nombreHotel, res.tipoHabitacion, res.fechaEntrada, res.fechaSalida);
 
     return res;
 }
 
-void insertarReserva(sqlite3 *db){
-    Reserva r = datosReserva();
+void insertarReserva(sqlite3 *db,char* nombre){
+    Reserva r = datosReserva(db, nombre);
     int x = insertarNuevaReserva(db, r);
 }
 
@@ -98,8 +109,6 @@ void leerFichero(tListaHoteles* lt){
 
 
 int registrar(tListaUsuarios *lu, tListaTrabajadores lt, sqlite3 *db){
-    printf("Entra");
-    fflush(stdout);
     Usuario sesion = datosUsuario();
     int enc=0;
     int res;
@@ -256,21 +265,12 @@ int iniciarSesion(tListaTrabajadores lt, tListaUsuarios lu, sqlite3 *db){
 
 
 //Se printean todos los hoteles
-void visualizarHoteles(tListaHoteles lh, sqlite3 *db){
-    int x = cargarHoteles(db,&lh);
-    for(int i=0;i<lh.numHoteles;i++){
-        printf("%s,%s,%s,%s,%d,%d\n", lh.listaHoteles[i].Compania,lh.listaHoteles[i].Nombre,lh.listaHoteles[i].Municipio,lh.listaHoteles[i].Provincia,lh.listaHoteles[i].numEstrellas,lh.listaHoteles[i].valoracionMedia);
-        fflush(stdout);
-    }
-    printf("Recorre\n");
-    fflush(stdout);
-}
 
 
-void insertarHoteles(sqlite3 *db, tListaHoteles lh){
-    leerFichero(&lh);
-    for(int i=0;i<lh.numHoteles;i++){
-        int x = insertarHotel(db,lh.listaHoteles[i]);
+void insertarHoteles(sqlite3 *db, tListaHoteles *lh){
+    leerFichero(lh);
+    for(int i=0;i<lh->numHoteles;i++){
+        int x = insertarHotel(db,lh->listaHoteles[i]);
     }
 }
 void insertarHotelesModificados(sqlite3 *db, tListaHoteles lh){
@@ -293,9 +293,22 @@ void BorrarHotel(tListaHoteles lh, sqlite3 *db){
     int x = borrarHotel(db,nombre);
 }
 
+void visualizarReservasDeBBDD(sqlite3 *db, tListaReservas *lr, char* correo){
+    int x = cargarReservasDeUnUsuario(db, lr, correo);
+    for(int i=0; i<lr->numeroReservas;i++){
+        printf("%s,%s,%s,%s,%s\n",lr->listaReserva[i].correoUsuario, lr->listaReserva[i].nombreHotel, lr->listaReserva[i].tipoHabitacion,lr->listaReserva[i].fechaEntrada,lr->listaReserva[i].fechaSalida);
+    }
+    
+}
+
+void borrarReservas(sqlite3 *db, char* usuario){
+    int x = cargarUsuarioActual(db, usuario);
+    int y = borrarReservasDeUnUsuario(db, usuario);
+    
+}
+
 
 void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
-
     int i=0;
     int enc=0;
     char nombre[100];
@@ -305,7 +318,12 @@ void modificarHotel2(tListaHoteles* tl, sqlite3 *db){
     scanf("%s",nombre);
     printf("\n%s", nombre);
     fflush(stdout);
+    printf("Antes de while");
+    fflush(stdout);
+
     while(enc==0 && i<tl->numHoteles){
+        printf("Entra al while");
+        fflush(stdout);
         if(strcmp(tl->listaHoteles[i].Nombre,nombre)==0){
             enc=1;
         }else{

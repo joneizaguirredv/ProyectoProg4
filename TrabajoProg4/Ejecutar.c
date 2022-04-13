@@ -122,25 +122,28 @@ int main(void){
     //int i = registrar(&lu);
     //printf("%d", i);
 
-
+    char resp;
     char opcion;
     char opcion2;
+    char opcion4;
+    char opcion5;
     int opcion3;
+    int x;
     char sesionActual[100];
     tListaTrabajadores lt;
     tListaUsuarios lu;
     inicializarListas(&lt, &lu, db);
     //insertarReserva(db);
 
-    for(int i=0;i<lu.numeroUsuarios;i++){
+    //for(int i=0;i<lu.numeroUsuarios;i++){
         //printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
         //fflush(stdout);
-        printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
-        fflush(stdout);
-    }
+        //printf("%s, %s, %s, %s, %d\n", lu.listaUsuarios[i].NombreUsuario, lu.listaUsuarios[i].ApellidoUsuario, lu.listaUsuarios[i].correoUsuario, lu.listaUsuarios[i].contrasenyaUsuario, lu.listaUsuarios[i].numeroTelefono);
+        //fflush(stdout);
+    //}
     tListaReservas lr;
     //char nombre[100] = "jon@gmail.com";
-    //nt x = cargarReservasDeUnUsuario(db, &lr, nombre);
+    //int x = cargarReservasDeUnUsuario(db, &lr, nombre);
     //for(int i=0;i<lr.numeroReservas;i++){
         //printf("%s,%s,%s,%s,%d,%d\n", hoteles.listaHoteles[i].Compania,hoteles.listaHoteles[i].Nombre,hoteles.listaHoteles[i].Municipio,hoteles.listaHoteles[i].Provincia,hoteles.listaHoteles[i].numEstrellas,hoteles.listaHoteles[i].valoracionMedia);
         //fflush(stdout);
@@ -148,16 +151,16 @@ int main(void){
         //fflush(stdout);
     //}
     tListaHoteles lh;
-    leerFichero(&lh);
+    //leerFichero(&lh);
     /*for(int i=0;i<lh.numHoteles;i++){
         int x = insertarHotel(db,lh.listaHoteles[i]);
     }*/
     //tListaHoteles hoteles;
-    insertarHoteles(db, lh);
-    visualizarHoteles(lh,db);
+    insertarHoteles(db, &lh);
+    //visualizarHoteles(lh,db);
     //borrarTodosHoteles(db);
-    modificarHotel2(&lh,db);
-    visualizarHoteles(lh,db);
+    //modificarHotel2(&lh,db);
+    //visualizarHoteles(lh,db);
     //BorrarHotel(lh,db);
     //visualizarHoteles(lh,db);
     //printf("\nHHH");
@@ -182,7 +185,6 @@ int main(void){
             
         case '1':
 
-                do{
                     opcion2 = iniciarSesion(lt,lu,db);
                     int x = cargarUsuarioActual(db, sesionActual);
                     printf("\n %s\n", sesionActual);
@@ -190,16 +192,43 @@ int main(void){
                     //printf("\nRes: %d", opcion2);
                     switch(opcion2){
                         case 1:
-                            menuTrabajador();
-                        
-                        case 2:
-                            menuCliente();
-                        case 3: menuInicial(); 
-                        case 4:;
+                            //insertarHoteles(db, lh);
+                            do{
+                                opcion4 = menuTrabajador();
+                                switch(opcion4){
+                                    case '1':BorrarHotel(lh, db);break;
+                                    case '2':InsertarHotel(db);break;
+                                    case '3':modificarHotel2(&lh, db);break;
+                                    case '4':visualizarHoteles(lh,db);break;
+                                    case '5':;
+                                        x=borrarUsuarioActual(db);
+                                        break;
+                                    default: printf("La opcion seleccionada no es correcta\n");
+                                }
+                            }while(opcion4 != '5');
                             break;
-                        default: printf("La opción seleccionada no es correcta\n");
+                        case 2:
+                            do{
+                                opcion5 = menuCliente();
+                                switch(opcion5){
+
+                                    case '1':visualizarHoteles(lh,db);break;
+                                    case '2':insertarReserva(db, sesionActual);break;
+                                    case '3':borrarReservas(db,sesionActual);break;
+                                    case '4':visualizarReservasDeBBDD(db, &lr, sesionActual);break;
+                                    case '5':;
+                                        x=borrarUsuarioActual(db);
+                                        break;
+                                    default:printf("La opcion seleccionada no es correcta\n");
+                                }
+                            }while(opcion5 != '5');
+                            break;
+                        case 3: printf("ERROR! La contraseña no es correcta\n");fflush(stdout); break;
+                        case 4: printf("ERROUsuario no registrado\n");fflush(stdout);
+                            break;
+                       
                     }
-                }while(opcion2 != 1 || opcion2 != 2 || opcion2 != 3);
+                
             break;
 
 
@@ -208,30 +237,30 @@ int main(void){
                 do{
                     opcion3 = registrar(&lu,lt,db);
                     printf("Res: %d", opcion3);
-                    switch(opcion3){
-                        case 1:
-                            break;
-                        case 2:
-                            break;
-                        default: printf("La opción seleccionada no es correcta\n");
+                    if(opcion3==2){
+                        printf("¿Quieres intentarlo de nuevo (s/n)? ");
+                        fflush(stdout);
+                        fflush(stdin);
+                        scanf("%c",&resp);
                     }
-                }while(opcion3 != 1 || opcion3 != 2);
-
-
-
-
-            int res = registrar(&lu,lt,db);
+                }while(opcion3 != 1 && resp=='s' );
             break; 
 
 
 
-        case '3':
+        case '3':printf("Gracias por usar nuestra aplicacion\n");
+            fflush(stdout);
+            x=borrarTodosHoteles(db);
+
             break;
         
         default: printf("La opcion seleccionada no es correcta\n");
             break;
         }
-    }while (opcion !='0');
+    }while (opcion !='3');
     return 0;
+
 }
+
+
 

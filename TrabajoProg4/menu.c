@@ -37,7 +37,7 @@ char menuCliente(){
     char opcion;
     printf("\n1. Visualizar hoteles\n");
     printf("2. Reservar un hotel\n");
-    printf("3. Modificar una reserva\n");
+    printf("3. Borrar todas las reservas\n");
     printf("4. Visualizar reservas\n");
     printf("5. Cerrar sesion\n");
     printf("Opcion: \n");

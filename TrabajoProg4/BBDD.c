@@ -378,11 +378,13 @@ int cargarReservasDeUnUsuario(sqlite3 *db, tListaReservas *lr, char* nom){
 	int numEstrellas;
 	int valoracionMedia;
 	int counter = 0;
+	printf("\n%d\n", lr->numeroReservas);
+
 
 	do{
 		if(sqlite3_step(stmt) == SQLITE_ROW){
 			lr->listaReserva[counter].correoUsuario = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,0)));
-			lr->listaReserva[counter].nombreHotel = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,2)));
+			lr->listaReserva[counter].nombreHotel = (char*)malloc(strlen((char*) sqlite3_column_text(stmt,1)));
 			
 			/*strcpy(nombre, (char*) sqlite3_column_text(stmt,0));
 			strcpy(apellido, (char*) sqlite3_column_text(stmt,1));
@@ -391,10 +393,10 @@ int cargarReservasDeUnUsuario(sqlite3 *db, tListaReservas *lr, char* nom){
 			telefono = sqlite3_column_int(stmt,4);*/
 
 			strcpy(lr->listaReserva[counter].correoUsuario , (char*) sqlite3_column_text(stmt,0));
-			strcpy(lr->listaReserva[counter].nombreHotel , (char*) sqlite3_column_text(stmt,2));
-			strcpy(lr->listaReserva[counter].tipoHabitacion , (char*) sqlite3_column_text(stmt,3));
-			strcpy(lr->listaReserva[counter].fechaEntrada , (char*) sqlite3_column_text(stmt,4));
-			strcpy(lr->listaReserva[counter].fechaSalida , (char*) sqlite3_column_text(stmt,5));
+			strcpy(lr->listaReserva[counter].nombreHotel , (char*) sqlite3_column_text(stmt,1));
+			strcpy(lr->listaReserva[counter].tipoHabitacion , (char*) sqlite3_column_text(stmt,2));
+			strcpy(lr->listaReserva[counter].fechaEntrada , (char*) sqlite3_column_text(stmt,3));
+			strcpy(lr->listaReserva[counter].fechaSalida , (char*) sqlite3_column_text(stmt,4));
 			
 			counter++;
 			
@@ -413,6 +415,8 @@ int cargarReservasDeUnUsuario(sqlite3 *db, tListaReservas *lr, char* nom){
 	printf("%d", lr->numeroReservas);
 
 	return SQLITE_OK;
+	printf("Sale");
+	fflush(stdout);
 }
 
 
@@ -467,6 +471,39 @@ int borrarHotel(sqlite3 *db, char* nombre){
 	result = sqlite3_step(stmt);
 	if (result != SQLITE_DONE) {
 		printf("Error deleting data from hotel table\n");
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+
+	return SQLITE_OK;
+}
+
+
+int borrarReservasDeUnUsuario(sqlite3 *db, char* nombre){
+	sqlite3_stmt *stmt;
+	char *sql = sqlite3_mprintf("delete from reserva where correo= '%q';", nombre);
+
+
+	int result = sqlite3_prepare_v2(db, sql, strlen(sql) + 1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data from reserva table\n");
 		return result;
 	}
 
@@ -671,6 +708,42 @@ int borrarTodosHoteles(sqlite3 *db) {
 
 	return SQLITE_OK;
 }
+
+
+int borrarUsuarioActual(sqlite3 *db){
+	sqlite3_stmt *stmt;
+
+	char sql[] = "delete from usuarioactual";
+
+	int result = sqlite3_prepare_v2(db, sql, -1, &stmt, NULL) ;
+	if (result != SQLITE_OK) {
+		printf("Error preparing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("SQL query prepared (DELETE)\n");
+
+	result = sqlite3_step(stmt);
+	if (result != SQLITE_DONE) {
+		printf("Error deleting data\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	result = sqlite3_finalize(stmt);
+	if (result != SQLITE_OK) {
+		printf("Error finalizing statement (DELETE)\n");
+		printf("%s\n", sqlite3_errmsg(db));
+		return result;
+	}
+
+	printf("Prepared statement finalized (DELETE)\n");
+
+	return SQLITE_OK;
+}
+
+
 
 int borrarTodosTrabajadores(sqlite3 *db) {
 	sqlite3_stmt *stmt;
